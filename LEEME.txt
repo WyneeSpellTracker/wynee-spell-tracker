@@ -1,0 +1,13 @@
+WYNEE SPELL TRACKER V10.2 - PRUEBA CONTROLADA
+
+1. No reemplaces tu V9 publicada hasta verificar esta versión.
+2. En Firebase Firestore > Rules, pega firestore.rules de esta carpeta y revisa antes de publicar.
+3. Publicar reglas solo permite probar la app: no modifica tu GitHub Pages.
+4. Para probar la V10.2 online, sube index.html, rooms.js y carpeta avatars/ juntos a una rama o sitio de prueba (no reemplaces producción).
+5. Comprueba crear sala, entrar desde otro navegador/dispositivo, guardar hechizos, editar, eliminar y cambiar avatar.
+6. No abras index.html como archivo local (file://), usa HTTPS.
+7. La seguridad debe probarse además con Firebase Emulator Suite: el simulador visual no garantiza cobertura total.
+8. El acceso es anónimo: al borrar datos del navegador puede perderse la identidad anterior. No compartas invitaciones públicamente.
+9. Las salas son colaborativas: los integrantes pueden editar y borrar registros.
+
+Cambios V10.2: comprobación de existencia en lectura de salas (línea 47), validación segura de campos opcionales y timestamps, longitud de ID de sala en invitaciones, y conservación de reducción al editar un registro avanzado.
