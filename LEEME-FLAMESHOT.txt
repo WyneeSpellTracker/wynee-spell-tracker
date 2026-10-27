@@ -1,0 +1,3 @@
+Wynee V11 + Flameshot (50 segundos).
+Se agregó Flameshot en modo Rápido, Táctico, Avanzado, salas compartidas, comandos de voz y Guía de voz.
+Sin cambios en configuración ni reglas de Firebase. No reemplazar V9 o V10.3. Descomprime en una carpeta separada y prueba.

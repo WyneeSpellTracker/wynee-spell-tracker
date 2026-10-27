@@ -1,0 +1,9 @@
+WYNEE V11 - TRANSCRIPCIÓN VISIBLE DE VOZ
+
+El cuadro encima del micrófono muestra la frase provisional (en cursiva) mientras Chrome escucha y conserva la frase final reconocida. El resultado o error se muestra por separado para no borrar la transcripción.
+
+Ejemplo de prueba: «mago flameshot tres veinte». Si Chrome entiende otra cosa, se verá la transcripción exacta.
+
+No se modificaron rooms.js, Firebase ni las reglas de Firestore. Sigue siendo gratuito y conserva el enlace de Ko-fi.
+
+Nota: las transcripciones provisionales dependen de lo que entregue el navegador; no siempre aparecen.

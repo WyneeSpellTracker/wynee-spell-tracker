@@ -1,0 +1,11 @@
+WYNEE SPELL TRACKER V11 - PRUEBAS
+
+1. Extrae todo el ZIP en una carpeta NUEVA.
+2. Abre index.html en Chrome. Si el micro no funciona desde archivo local, usa un servidor local (localhost) o HTTPS.
+3. Botones flotantes: Guía de voz y Activar voz.
+4. Prueba en Táctico: EXP F 321; mago purificar 332; CD EXP; Revisa a todos.
+5. Para salas compartidas necesitas conexión a internet, Firebase configurado y las reglas Firestore existentes.
+6. No sustituyas ni publiques V9 o V10.3. Esta versión es experimental.
+7. En modo Avanzado se usan los valores de kills y asistencias que estén escritos en pantalla.
+8. Los registros de sala se confirman al guardar en Firebase; las consultas usan la última sincronización recibida.
+9. El navegador puede interrumpir el micrófono o no reconocer varias frases seguidas.

@@ -1,0 +1,18 @@
+WYNEE V11 — CORRECCIONES DE RECONOCIMIENTO DE VOZ
+- Flameshot: flanchott, flanchut, flexshot, flanchot.
+- ADC: interpreta la transcripción «A DC».
+- ROAM: interpreta «pamer» y «supo».
+- MID: interpreta «M I D» y responde oralmente «medio» en lugar de deletrear MID.
+- EXP: interpreta «revisa alexpi» como consulta al EXP.
+- Las variantes nuevas NO se añadieron a las tablas de la Guía de voz.
+- Conserva la transcripción visible, donaciones Ko-fi, salas y funciones anteriores.
+- No se cambió la configuración ni las reglas de Firebase.
+
+FUTURO — WYNEE ROOMS 2.0 (NO IMPLEMENTADO)
+Registro de cuentas; nombres/tipos de salas; soundboard sincronizado;
+mute individual y general; comandos de voz para todos los integrantes;
+mensajes sociales leídos por Wynee para todos (ej. «dile a Rany que huele feo»)
+con límites antispam y controles de silencio; eliminación de salas vacías
+tras dos minutos mediante presencia y limpieza fiable en servidor.
+
+Probar reconocimiento real en Chrome y sincronización en Netlify antes de publicar.

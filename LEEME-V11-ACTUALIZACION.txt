@@ -1,0 +1,11 @@
+WYNEE V11 — CORRECCIONES Y DONACIONES
+
+- Flameshot: 50 segundos, comando escrito flame o flameshot; voz acepta flameshot, flamechot, flame, fleimshot, fleinshot.
+- Reconocimiento de voz ADC: variantes A D C, A de ce, adece.
+- Guía de voz: Medio en MID y consejo para probar sinónimos.
+- Comandos escritos: EXP solo exp y xp; MID mid, medio, mago; ORO incluye adc; abreviaturas de hechizos y Flameshot.
+- Ko-fi: https://ko-fi.com/wyneespelltracker, apoyo voluntario; sin suscripciones ni registros.
+- No se modificaron credenciales, configuración ni reglas de Firebase.
+- Es una copia para pruebas; no reemplaza V9 ni V10.3.
+
+PRUEBAS SUGERIDAS: escribir adc flame 321, exp p 321, mid puri 332, usar voz «a de ce parpadeo tres veinte», probar salas y abrir Ko-fi.

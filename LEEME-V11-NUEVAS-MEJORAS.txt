@@ -1,0 +1,14 @@
+WYNEE V11 — MEJORAS PARA NETLIFY
+
+1. Ko-fi: enlace único al pie de página común, después del contenido, en los modos Rápido, Táctico, Avanzado y salas.
+2. Modo Táctico individual: historial visual limitado a los 5 registros más recientes. Se conservan internamente hasta 500 registros para mantener el tablero de los 5 roles y sus cooldowns, incluso cuando un rol no figura entre los últimos cinco.
+3. Salas compartidas: botón «Reiniciar partida» con confirmación; borra los registros de hechizos para todos, sin borrar miembros, sala ni código. Se procesa en lotes de 200 documentos.
+4. Se conservan las correcciones de voz, transcripción visible y Flameshot.
+
+IMPORTANTE SOBRE FIREBASE
+- Las reglas existentes permiten eliminar registros a cualquier integrante autenticado de la sala; el botón NO está restringido al anfitrión. Esto se puede endurecer en Rooms 2.0.
+- No se modificaron las reglas ni la configuración Firebase. El reinicio requiere conexión y permisos vigentes; no impide que un compañero registre un hechizo durante la limpieza.
+- Las reglas Firestore incluidas todavía NO autorizan Flameshot. Para compartir Flameshot, es necesario actualizar y publicar reglas compatibles en Firebase; no basta con subir este ZIP a Netlify.
+- No hay limpieza automática de salas vacías todavía.
+
+Pruebas: comprobar footer en cada modo, 6+ registros tácticos con roles diferentes, y reinicio sincronizado entre dos dispositivos en Netlify.

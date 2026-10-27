@@ -1,0 +1,8 @@
+WYNEE SPELL TRACKER V10.3
+
+Cambio: se agregó campo de apodo dentro de la sala; guardar perfil actualiza el apodo y avatar en tiempo real.
+
+No requiere cambiar las reglas de Firebase V10.2.
+
+Para actualizar la prueba Netlify Drop, subir la carpeta completa con index.html, rooms.js, firestore.rules y avatars.
+Para GitHub, actualizar index.html y rooms.js SOLO en rama prueba-v10-2, no main.

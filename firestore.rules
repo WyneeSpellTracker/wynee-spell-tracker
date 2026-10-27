@@ -1,0 +1,81 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function member(roomId) {
+      return signedIn() && exists(/databases/$(database)/documents/rooms/$(roomId)/members/$(request.auth.uid));
+    }
+    function validProfile(d) {
+      return d.keys().hasOnly(['uid','nick','avatar','inviteId','joinedAt'])
+        && d.keys().hasAll(['uid','nick','avatar','inviteId','joinedAt'])
+        && d.uid == request.auth.uid && d.nick is string
+        && d.nick.size() >= 2 && d.nick.size() <= 24
+        && d.avatar is int && d.avatar >= 1 && d.avatar <= 6
+        && d.inviteId is string && d.inviteId.size() == 36
+        && d.joinedAt == request.time;
+    }
+    function validRecord(d) {
+      return d.keys().hasOnly(['role','spell','cd','used','ready','reduction','kills','assists','author','createdAt','editedAt'])
+        && d.keys().hasAll(['role','spell','cd','used','ready','reduction','kills','assists','author','createdAt'])
+        && d.role in ['','EXP','MID','JUNGLA','ROAM','ORO']
+        && d.spell in ['Parpadeo','Retribución','Aegis','Inspirar','Venganza','Petrificar','Revitalizar','Purificar','Sprint']
+        && d.cd is int && d.cd >= 30 && d.cd <= 120
+        && d.used is int && d.used >= 0 && d.used <= 59999
+        && d.ready is int && d.ready >= d.used && d.ready <= 60119
+        && (!('reduction' in d) || d.reduction == null || (d.reduction is int && d.reduction >= 12 && d.reduction <= 20))
+        && (!('kills' in d) || d.kills == null || (d.kills is int && d.kills >= 0 && d.kills <= 999))
+        && (!('assists' in d) || d.assists == null || (d.assists is int && d.assists >= 0 && d.assists <= 999))
+        && d.author is string && d.author.size() > 0
+        && d.createdAt is timestamp
+        && (!('editedAt' in d) || d.editedAt is timestamp);
+    }
+    match /invites/{code} {
+      allow get: if signedIn() && code.size() == 36;
+      allow list: if false;
+      allow create: if signedIn() && code.size() == 36
+        && request.resource.data.keys().hasOnly(['roomId','owner','createdAt'])
+        && request.resource.data.owner == request.auth.uid
+        && request.resource.data.roomId is string
+        && request.resource.data.roomId.size() == 40
+        && request.resource.data.createdAt == request.time
+        && existsAfter(/databases/$(database)/documents/rooms/$(request.resource.data.roomId))
+        && getAfter(/databases/$(database)/documents/rooms/$(request.resource.data.roomId)).data.owner == request.auth.uid;
+      allow update, delete: if false;
+    }
+    match /rooms/{roomId} {
+      allow create: if signedIn() && roomId.size() == 40
+        && request.resource.data.keys().hasOnly(['owner','mode','createdAt'])
+        && request.resource.data.owner == request.auth.uid
+        && request.resource.data.mode in ['quick','tactical','advanced']
+        && request.resource.data.createdAt == request.time;
+      allow get: if signedIn() && exists(/databases/$(database)/documents/rooms/$(roomId))
+        && (resource.data.owner == request.auth.uid || member(roomId));
+      allow list, update, delete: if false;
+      match /members/{uid} {
+        allow get: if (signedIn() && uid == request.auth.uid) || member(roomId);
+        allow list: if member(roomId);
+        allow create: if signedIn() && uid == request.auth.uid
+          && validProfile(request.resource.data)
+          && existsAfter(/databases/$(database)/documents/invites/$(request.resource.data.inviteId))
+          && getAfter(/databases/$(database)/documents/invites/$(request.resource.data.inviteId)).data.roomId == roomId
+          && existsAfter(/databases/$(database)/documents/rooms/$(roomId));
+        allow update: if signedIn() && uid == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nick','avatar'])
+          && request.resource.data.nick is string
+          && request.resource.data.nick.size() >= 2 && request.resource.data.nick.size() <= 24
+          && request.resource.data.avatar is int && request.resource.data.avatar >= 1 && request.resource.data.avatar <= 6;
+        allow delete: if false;
+      }
+      match /records/{recordId} {
+        allow get, list: if member(roomId);
+        allow create: if member(roomId) && validRecord(request.resource.data)
+          && request.resource.data.author == request.auth.uid
+          && request.resource.data.createdAt == request.time;
+        allow update: if member(roomId) && validRecord(request.resource.data)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['role','spell','cd','used','ready','reduction','kills','assists','editedAt'])
+          && request.resource.data.editedAt == request.time;
+        allow delete: if member(roomId);
+      }
+    }
+  }
+}

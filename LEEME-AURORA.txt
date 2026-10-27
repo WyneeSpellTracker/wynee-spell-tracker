@@ -1,0 +1,1 @@
+Wynee V1 - Aurora suave independiente. Cambios unicamente en index.html (canvas 2D, CSS, JS). No se modificaron voice.js, rooms.js, firestore.rules ni imagenes. Probar en Netlify antes de publicar.

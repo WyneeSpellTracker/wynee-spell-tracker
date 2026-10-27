@@ -1,0 +1,12 @@
+Wynee V11 — Recordatorios de cooldowns cada 30 segundos
+
+- Di «Activa los recordatorios» o «Alertas de recuperación activadas» con el micrófono de Wynee Voice encendido.
+- Cada 30 segundos Wynee anuncia hasta tres roles con los minutos de recuperación más próximos, ordenados de menor a mayor.
+- Di «Desactiva los recordatorios» para detenerlos. Desactivados por defecto.
+- Se utilizan los registros ya existentes del modo Estándar, Emblema o salas con roles. El modo Rápido no incluye roles.
+- No se compara con el reloj real de la partida: son recordatorios de minutos de recuperación registrados, no avisos de vencimiento confirmado.
+- Si estás dictando otro comando, se omite ese ciclo de recordatorio para dar prioridad a tu instrucción.
+- Si el recordatorio está sonando, tocar el botón del micrófono interrumpe la lectura y vuelve a escuchar.
+- El micrófono debe permanecer activado y la pestaña en ejecución; el navegador puede retrasar los intervalos si suspende la página.
+- Etiquetas visibles: Táctico -> Estándar; Avanzado -> Emblema. Los identificadores internos se conservan.
+- No se modificaron las reglas de Firestore ni la configuración de Firebase.
