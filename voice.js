@@ -35,6 +35,30 @@ const voiceRole=role=>({MID:'medio',EXP:'EXP',JUNGLA:'jungla',ROAM:'roamer',ORO:
 const spoken=n=>{let m=Math.floor(n/60),s=n%60;return m+' '+String(s).padStart(2,'0')};
 function latest(){const ctx=context();if(!ctx)return[];if(ctx.kind==='room')return window.wyneeRoomRecords||[];let key=ctx.kind==='tactical'?'wynee-spell-tracker-individual-v1':ctx.kind==='advanced'?'wynee-spell-tracker-v9-advanced':'wynee-spell-tracker-v9-quick';try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return[]}}
 let active=false,recognition=null,starting=false,speaking=false,queue=Promise.resolve(),roomRecords=[],last=new Map();
+// En móviles, SpeechRecognition a menudo devuelve una palabra por resultado.
+let mobileFragments=[],mobileFlushTimer=null;
+function clearMobileBuffer(){clearTimeout(mobileFlushTimer);mobileFlushTimer=null;mobileFragments=[]}
+function scheduleMobileFlush(){
+ clearTimeout(mobileFlushTimer);
+ mobileFlushTimer=setTimeout(()=>{
+  mobileFlushTimer=null;
+  const phrase=mobileFragments.join(' ').trim();mobileFragments=[];
+  if(!phrase)return;
+  heard(phrase,true);
+  queue=queue.then(async()=>{handlingCommands++;try{await handle(phrase)}finally{handlingCommands--}}).catch(err=>info('Error de voz: '+err.message));
+ },/Android|iPhone|iPad/i.test(navigator.userAgent)?2100:850);
+}
+function enqueueRecognizedPhrase(phrase){
+ if(!phrase?.trim())return;
+ const p=phrase.trim();
+ mobileFragments.push(p);
+ heard(mobileFragments.join(' '),false);
+ // Frases completas terminadas en una marca de tiempo se procesan sin esperar más.
+ const full=mobileFragments.join(' ').trim();
+ if(/\b\d{2,5}\s*$/.test(full))scheduleMobileFlush();
+ else scheduleMobileFlush();
+}
+
 let remindersEnabled=false,reminderTimer=null,handlingCommands=0,reminderSpeaking=false;
 function reminderCandidates(){
   const ctx=context();
@@ -106,8 +130,8 @@ async function register(items,errors,ctx){const lines=[];for(const item of items
 async function consult(q){const ctx=context();if(!ctx){info('Entra a un modo o sala para consultar.');return}if(ctx.quick){info('El modo rápido no guarda roles. Usa Estándar, Emblema o una sala con roles.');await speak(['El modo rápido no tiene roles']);return}let data=latest();const rolesWanted=q.all?['EXP','MID','JUNGLA','ROAM','ORO']:[q.role];let lines=rolesWanted.map(role=>{const item=ctx.kind==='room'?data.find(x=>x.role===role):[...data].reverse().find(x=>x.role===role);return item?role+' tiene '+item.spell+' al minuto '+spoken(item.ready):'No hay cooldown registrado para '+role});info(lines.join(' · '));await speak(lines.map(line=>line.replace(/^MID\b/,'medio').replace(/\bMID\b/g,'medio')))}
 async function handle(raw){heard(raw,true);info('Procesando comando…');const setting=reminderCommand(raw);if(setting!==null){remindersEnabled=setting;ensureReminderTimer();info(setting?'🔔 Recordatorios activados: tres próximos cooldowns cada 30 segundos.':'🔕 Recordatorios desactivados.');await speak([setting?'Recordatorios activados':'Recordatorios desactivados']);return}const ctx=context();if(!ctx){info('Abre un modo o entra a una sala antes de dictar');return}const q=query(raw);if(q)return consult(q);const {segments,errors}=parseCommands(raw,ctx.quick);if(!segments.length){info('Comando desconocido: '+errors.join(' · ')+'. Revisa arriba lo que entendió el micrófono.');return speak(['Comando no reconocido'])}return register(segments,errors,ctx)}
 function restart(delay=450){if(!active||speaking||starting||!recognition)return;setTimeout(()=>{if(!active||speaking||starting)return;try{starting=true;recognition.start()}catch{starting=false}},delay)}
-function stop(){active=false;starting=false;try{recognition?.abort()}catch{}$('wyneeMic').textContent='🎙️ Activar voz';$('wyneeMic').classList.remove('active');$('wyneeMic').setAttribute('aria-pressed','false');info('Micrófono apagado')}
-function start(){if(!Speech){info('Tu navegador no permite reconocimiento de voz. Prueba Chrome.');return}active=true;recognition=new Speech();ensureReminderTimer();recognition.lang='es-MX';recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;recognition.onstart=()=>{starting=false;info('🎙️ Escuchando…')};recognition.onresult=e=>{let interim='',finalPhrases=[];for(let i=e.resultIndex;i<e.results.length;i++){const phrase=e.results[i][0]?.transcript||'';if(e.results[i].isFinal){if(phrase.trim())finalPhrases.push(phrase.trim())}else interim+=phrase}if(interim.trim())heard(interim,false);for(const phrase of finalPhrases){heard(phrase,true);queue=queue.then(async()=>{handlingCommands++;try{await handle(phrase)}finally{handlingCommands--}}).catch(err=>info('Error de voz: '+err.message))}};recognition.onerror=e=>{starting=false;info('Micrófono: '+e.error);if(['not-allowed','service-not-allowed','audio-capture'].includes(e.error))stop()};recognition.onend=()=>{starting=false;restart(650)};$('wyneeMic').textContent='🔴 Detener voz';$('wyneeMic').classList.add('active');$('wyneeMic').setAttribute('aria-pressed','true');restart(0)}
+function stop(){active=false;clearMobileBuffer();starting=false;try{recognition?.abort()}catch{}$('wyneeMic').textContent='🎙️ Activar voz';$('wyneeMic').classList.remove('active');$('wyneeMic').setAttribute('aria-pressed','false');info('Micrófono apagado')}
+function start(){if(!Speech){info('Tu navegador no permite reconocimiento de voz. Prueba Chrome.');return}active=true;recognition=new Speech();ensureReminderTimer();recognition.lang='es-MX';recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;recognition.onstart=()=>{starting=false;info('🎙️ Escuchando…')};recognition.onresult=e=>{let interim='',finalPhrases=[];for(let i=e.resultIndex;i<e.results.length;i++){const phrase=e.results[i][0]?.transcript||'';if(e.results[i].isFinal){if(phrase.trim())finalPhrases.push(phrase.trim())}else interim+=phrase}if(interim.trim())heard([...mobileFragments,interim].join(' '),false);for(const phrase of finalPhrases)enqueueRecognizedPhrase(phrase)};recognition.onerror=e=>{starting=false;info('Micrófono: '+e.error);if(['not-allowed','service-not-allowed','audio-capture'].includes(e.error))stop()};recognition.onend=()=>{starting=false;restart(650)};$('wyneeMic').textContent='🔴 Detener voz';$('wyneeMic').classList.add('active');$('wyneeMic').setAttribute('aria-pressed','true');restart(0)}
 $('wyneeMic').onclick=()=>{if(active&&reminderSpeaking){window.speechSynthesis?.cancel();reminderSpeaking=false;speaking=false;restart(0);info('🎙️ Aviso interrumpido. Escuchando tu comando…');return}active?stop():start()};window.addEventListener('pagehide',()=>{clearReminderTimer();stop();window.speechSynthesis?.cancel()});window.addEventListener('wynee:room-records',e=>{roomRecords=e.detail.records;window.wyneeRoomRecords=roomRecords});
 // Mantener intacto el submit original de las calculadoras. Solo se interceptan
 // comandos de configuración y consultas, nunca registros normales.
