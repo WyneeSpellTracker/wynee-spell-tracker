@@ -199,15 +199,25 @@ body.wynee-lightning-active>.wrap{position:relative;z-index:1}
 .wynee-title-panel h1{text-shadow:0 2px 18px #08060eea,0 0 25px #ff355733!important}
 .wynee-title-panel .sub{text-shadow:0 2px 9px #08060e!important}
 @media(prefers-reduced-motion:reduce){.wynee-title-panel .wynee-soft-aurora{opacity:.5}}
-</style></head><body><canvas id="wynee-lightning" aria-hidden="true"></canvas><main class="wrap"><div class="topbar"><div class="social-top"><a href="https://www.tiktok.com/@itzwine19" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.7 2h-3.5v13.4a3.1 3.1 0 1 1-2.7-3.1V8.8a6.6 6.6 0 1 0 6.2 6.6V8.6a9 9 0 0 0 5.3 1.7V6.8A5.3 5.3 0 0 1 16.7 2Z"/></svg><span>TikTok · @itzwine19 ↗</span></a><a href="https://www.youtube.com/@iTzWine19" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#ff315a"><path d="M22 7.3a2.8 2.8 0 0 0-2-2C18.3 4.8 12 4.8 12 4.8s-6.3 0-8 .5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 1.5 12c0 1.6.2 3.2.5 4.7a2.8 2.8 0 0 0 2 2c1.7.5 8 .5 8 .5s6.3 0 8-.5a2.8 2.8 0 0 0 2-2c.3-1.5.5-3.1.5-4.7s-.2-3.2-.5-4.7ZM9.8 15.4V8.6l6 3.4-6 3.4Z"/></svg><span>YouTube · @iTzWine19 ↗</span></a></div><div class="wynee-header-actions"><button class="about-btn" id="aboutOpen" type="button">Sobre Wynee</button><a class="wynee-donate-btn" href="https://ko-fi.com/wyneespelltracker" target="_blank" rel="noopener noreferrer">♥ Donaciones</a></div></div><div class="tracker-page" id="trackerPage"><header class="wynee-title-panel"><canvas id="wyneeSoftAurora" class="wynee-soft-aurora" aria-hidden="true"></canvas><div><h1>Wynee Spell Tracker</h1><p class="sub muted">COMPETITIVE TOOLS</p></div></header>
+</style><style id="wynee-global-auth-style">
+.wynee-auth-overlay[hidden],#wyneeAuthLogin[hidden],#wyneeAuthProfile[hidden],#wyneeAuthLogout[hidden]{display:none!important}
+.wynee-auth-overlay{position:fixed;inset:0;z-index:99999;background:#060409d9;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto;backdrop-filter:blur(7px)}
+.wynee-auth-panel{width:min(100%,470px);max-height:94vh;overflow:auto;padding:24px;border-radius:17px;border:1px solid #a13c59;background:linear-gradient(145deg,#25141e,#0d0d13);box-shadow:0 20px 80px #000c;color:#fff}
+.wynee-auth-top{display:flex;align-items:center;justify-content:space-between;gap:15px}.wynee-auth-top h2{margin:0;color:#fff}.wynee-auth-panel label{display:block;margin:12px 0;color:#f2dfe5;font-size:14px}.wynee-auth-panel input{display:block;width:100%;margin-top:6px;box-sizing:border-box}.wynee-auth-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.wynee-auth-actions button{flex:1}.wynee-auth-divider{text-align:center;margin:17px 0;color:#b9aab3;font-size:12px;letter-spacing:.12em}.wynee-google-btn{width:100%}.wynee-auth-avatars{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.wynee-auth-avatar{border:2px solid #4b2b38;background:#17121a;border-radius:12px;padding:4px;cursor:pointer}.wynee-auth-avatar.selected{border-color:#ff557b;box-shadow:0 0 12px #ff557b55}.wynee-auth-avatar img{width:52px;height:52px;object-fit:cover;border-radius:9px}#wyneeAuthStatus{min-height:20px;font-size:13px}
+</style><style id="wynee-rooms-maintenance-style">
+#roomPage{display:none!important}
+#wyneeRoomsChoice.wynee-rooms-maintenance{cursor:not-allowed;opacity:.8;border-color:#583443;box-shadow:0 10px 28px #0007;transform:none!important}
+#wyneeRoomsChoice.wynee-rooms-maintenance:hover{transform:none!important;box-shadow:0 10px 28px #0007;border-color:#583443}
+#wyneeRoomsChoice.wynee-rooms-maintenance em{color:#ffb1be}
+</style></head><body><canvas id="wynee-lightning" aria-hidden="true"></canvas><main class="wrap"><div class="topbar"><div class="social-top"><a href="https://www.tiktok.com/@itzwine19" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.7 2h-3.5v13.4a3.1 3.1 0 1 1-2.7-3.1V8.8a6.6 6.6 0 1 0 6.2 6.6V8.6a9 9 0 0 0 5.3 1.7V6.8A5.3 5.3 0 0 1 16.7 2Z"/></svg><span>TikTok · @itzwine19 ↗</span></a><a href="https://www.youtube.com/@iTzWine19" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#ff315a"><path d="M22 7.3a2.8 2.8 0 0 0-2-2C18.3 4.8 12 4.8 12 4.8s-6.3 0-8 .5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 1.5 12c0 1.6.2 3.2.5 4.7a2.8 2.8 0 0 0 2 2c1.7.5 8 .5 8 .5s6.3 0 8-.5a2.8 2.8 0 0 0 2-2c.3-1.5.5-3.1.5-4.7s-.2-3.2-.5-4.7ZM9.8 15.4V8.6l6 3.4-6 3.4Z"/></svg><span>YouTube · @iTzWine19 ↗</span></a></div><div class="wynee-header-actions"><button id="wyneeAuthTrigger" class="about-btn" type="button">👤 Iniciar sesión</button><button class="about-btn" id="aboutOpen" type="button">Sobre Wynee</button><a class="wynee-donate-btn" href="https://ko-fi.com/wyneespelltracker" target="_blank" rel="noopener noreferrer">♥ Donaciones</a></div></div><div class="tracker-page" id="trackerPage"><header class="wynee-title-panel"><canvas id="wyneeSoftAurora" class="wynee-soft-aurora" aria-hidden="true"></canvas><div><h1>Wynee Spell Tracker</h1><p class="sub muted">COMPETITIVE TOOLS</p></div></header>
 <div class="lobby-page" id="lobbyPage">
 
 <section id="wyneeExperience" class="wynee-experience" aria-label="Elegir experiencia">
  <div class="experience-heading"><span class="experience-eyebrow">COMPETITIVE TOOLS · WYNEE V1</span><h2>ELIGE TU EXPERIENCIA</h2><p>Una herramienta. Dos formas de jugar.</p></div>
  <div class="experience-cards">
   <button type="button" id="wyneeIndividualChoice" class="experience-card"><span class="experience-icon">⚡</span><strong>INDIVIDUAL</strong><span>Controla hechizos, tiempos y recordatorios a tu ritmo.</span><em>ENTRAR A CALCULADORAS →</em></button>
-  <button type="button" id="wyneeRoomsChoice" class="experience-card"><span class="experience-icon">♧</span><strong>SALAS COMPARTIDAS</strong><span>Organiza tu escuadra y sincroniza los cooldowns.</span><em>ENTRAR A SALAS →</em></button>
- </div><p class="experience-footnote">Rápido · Estándar · Emblema &nbsp; / &nbsp; Multijugador con código de invitación</p>
+  <button type="button" id="wyneeRoomsChoice" class="experience-card wynee-rooms-maintenance" disabled aria-disabled="true" aria-describedby="wyneeRoomsNotice"><span class="experience-icon">♧</span><strong>SALAS COMPARTIDAS</strong><span id="wyneeRoomsNotice">Estamos mejorando la estabilidad y seguridad de las salas. Temporalmente no disponibles.</span><em>EN MANTENIMIENTO · VOLVERÁN PRONTO</em></button>
+ </div><p class="experience-footnote">Rápido · Estándar · Emblema &nbsp; / &nbsp; Salas compartidas en mantenimiento</p>
 </section>
 <section id="wyneeIndividualHome" hidden><div class="experience-back"><button type="button" class="secondary small-btn" id="wyneeBackExperience">← Elegir experiencia</button><span>INDIVIDUAL</span></div>
 <div id="lobbyHero"><div class="hero-banner wynee-victory-hero" aria-label="Calcula, juega, domina"><div class="wynee-victory-words"><span>CALCULA,</span><span>JUEGA,</span><span>DOMINA</span></div><div class="wynee-victory-art" role="img" aria-label="Killua con movimiento y neblina"><img src="./assets/killua-blended.webp" alt="" loading="eager"></div></div>
@@ -289,28 +299,93 @@ renderTactical();recent('quickRecent',quick);recent('advancedRecent',advanced);u
 })();
 </script>
 <style>
-#roomPage[hidden],#roomEntry[hidden],#roomWorkspace[hidden],#roomAdvancedStats[hidden],#roomBoard[hidden]{display:none!important}
+#roomFarewell[hidden],#roomStandardTabs[hidden],#roomEmblemPanel[hidden],#roomRecordsPanel[hidden],#roomStageProfile[hidden],#roomStageActions[hidden],#roomPage[hidden],#roomEntry[hidden],#roomWorkspace[hidden],#roomAdvancedStats[hidden],#roomBoard[hidden]{display:none!important}
 .room-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}.room-fields label{display:grid;gap:7px;font-size:13px;color:#c9c4cb;font-weight:750}.room-fields select{background:#0b0b10;color:#fff;border:1px solid #5c4650;border-radius:6px;padding:13px}.avatar-picker{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.avatar-option{border-radius:50%;padding:3px;width:72px;height:72px;background:#222;box-shadow:none;border:2px solid #53434a}.avatar-option.selected{border:3px solid #ff4868;box-shadow:0 0 15px #ed285a77}.room-avatar{width:42px;height:42px;object-fit:cover;border-radius:50%;flex-shrink:0}.avatar-option .room-avatar{width:100%;height:100%}.room-members{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.member-chip{display:flex;align-items:center;gap:7px;background:#241920;border:1px solid #5c2b38;border-radius:30px;padding:5px 12px 5px 5px;font-size:13px}.member-chip .room-avatar{width:32px;height:32px}.room-record{display:flex;align-items:center;gap:12px;justify-content:space-between;border:1px solid #46313b;border-radius:8px;padding:12px;margin:8px 0;background:#121116;flex-wrap:wrap}.record-detail{display:flex;align-items:center;gap:10px;flex:1;min-width:180px}.record-detail p{margin:4px 0 0}.room-record .clock{font-size:25px}.record-actions{display:flex;gap:5px}.room-actions{display:flex;gap:9px;flex-wrap:wrap}.room-code-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.room-code-row input{font-size:13px;min-width:170px}.room-advanced{display:flex;gap:12px;flex-wrap:wrap}.room-advanced label{display:grid;gap:5px}.room-advanced input{max-width:130px}.room-board{margin:15px 0}.room-note{color:#bdb3bb;font-size:12px;line-height:1.6}
+.wynee-sound-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.wynee-sound-grid button{padding:13px;opacity:.55;cursor:not-allowed}@media(max-width:550px){.wynee-sound-grid{grid-template-columns:1fr}}
+ .room-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}.room-tab{background:#1b151d;border:1px solid #663744;color:#f7eaf0;border-radius:8px;padding:12px 18px}.room-tab.active{background:#85233e;border-color:#ff6b87;box-shadow:0 0 12px #ec315b55}.room-emblem-result{margin-top:18px;padding:18px;border:1px solid #633143;border-radius:8px;background:#1d121a;color:#fff;font-weight:700}
+
+/* Wynee Rooms: panel de entrada compacto; no afecta Individual */
+#roomPage #roomEntry{max-width:780px;margin:0 auto;padding:18px 20px}
+#roomPage #roomEntry .room-onboarding-heading{margin-bottom:12px}
+#roomPage #roomEntry .room-fields{margin:10px 0;gap:10px}
+#roomPage #roomEntry .room-fields input,#roomPage #roomEntry .room-fields select{min-height:44px}
+#roomPage #roomEntry hr{margin:16px 0!important}
+#roomPage #roomEntry .room-phase-note{margin-top:12px}
+@media(max-width:600px){#roomPage #roomEntry{padding:14px 12px}}
+
+/* Complementos opcionales de Rooms: la calculadora permanece como función principal. */
+#roomWorkspace .wynee-room-tools{margin:12px 0 16px;border:1px solid #65303e;background:#141016;border-radius:10px;overflow:hidden}
+#roomWorkspace .wynee-room-tools>summary{cursor:pointer;padding:13px 17px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#ffe5ed;font-weight:800;list-style:none}
+#roomWorkspace .wynee-room-tools>summary::-webkit-details-marker{display:none}
+#roomWorkspace .wynee-room-tools>summary::after{content:'▾';font-size:17px;color:#ff667f}
+#roomWorkspace .wynee-room-tools[open]>summary::after{content:'▴'}
+#roomWorkspace .wynee-tools-hint{font-size:11px;font-weight:500;color:#ae98a2;margin-left:auto}
+#roomWorkspace .wynee-tools-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 14px 14px}
+#roomWorkspace .wynee-tools-card{min-width:0;padding:14px;background:#19141b;border:1px solid #442d38;border-radius:9px}
+#roomWorkspace .wynee-tools-card h3{margin:0 0 10px}
+#roomWorkspace .wynee-joke-form{display:grid;gap:10px}
+#roomWorkspace .wynee-joke-label{color:#ffb4c6;font-weight:800}
+#roomWorkspace .wynee-joke-form textarea{width:100%;resize:vertical;min-height:75px;background:#0c0b11;border:1px solid #60404e;border-radius:8px;color:#fff;padding:12px;font:inherit}
+#roomWorkspace .wynee-joke-form button{justify-self:start}
+#roomWorkspace .wynee-sound-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#roomWorkspace .wynee-sound-grid button{font-size:12px;padding:9px 6px}
+@media(max-width:680px){#roomWorkspace .wynee-tools-columns{grid-template-columns:1fr}#roomWorkspace .wynee-tools-hint{display:none}}
 </style>
+<style>
+#roomEntry .room-entry-alert{margin:12px 0 16px;padding:13px 16px;border:1px solid rgba(255,77,111,.55);background:rgba(115,19,41,.20);border-radius:10px;color:#ff8096;font-weight:650;line-height:1.5}
+#roomEntry .room-entry-alert.success{border-color:rgba(54,189,137,.5);background:rgba(24,106,76,.12);color:#8be9c0}
+#roomEntry .room-entry-alert[hidden]{display:none}
+#roomPage:has(#roomEntry:not([hidden])) > #roomStatus{display:none}
+</style>
+<button type="button" id="openRooms" hidden aria-hidden="true" tabindex="-1">Abrir salas</button>
 <section id="roomPage" class="lobby-page" hidden>
- <div class="calculator-top"><button class="secondary" id="roomBack" type="button">← Volver al inicio</button><span class="mode-label">SALAS COMPARTIDAS · V10</span></div>
- <section class="panel" id="roomEntry"><div class="room-onboarding-heading"><span class="experience-eyebrow">WYNEE ROOMS · FASE 1</span><h2>PREPARA TU ESCUADRA</h2><p class="tiny">Perfil de invitado con autenticación anónima existente. Las cuentas permanentes se implementarán más adelante.</p></div><div class="room-stage" id="roomStageProfile"><div class="room-stage-label">01 / PERFIL DE JUGADOR</div><h3>Elige tu apodo y avatar</h3><p class="tiny">Usa un apodo y uno de los avatares. Todos los miembros pueden añadir, editar y borrar registros.</p>
+ <div class="calculator-top"><button class="secondary" id="roomBack" type="button">← Volver al inicio</button><span class="mode-label">WYNEE ROOMS · V1</span></div>
+ <section class="panel" id="roomEntry"><div class="room-onboarding-heading"><span class="experience-eyebrow">WYNEE ROOMS · FASE 1</span><h2>PREPARA TU SALA</h2><p class="tiny">Utiliza tu cuenta Wynee para crear o unirte a una sala. Tu apodo y avatar se usarán automáticamente.</p></div><div class="room-stage" id="roomStageProfile" hidden><div class="room-stage-label">01 / PERFIL DE JUGADOR</div><h3>Elige tu apodo y avatar</h3><p class="tiny">Usa un apodo y uno de los avatares. Todos los miembros pueden añadir, editar y borrar registros.</p>
   <div class="room-fields"><label>Tu apodo<input id="roomNickname" maxlength="24" minlength="2" placeholder="Ej. iWyne" autocomplete="nickname"></label></div>
   <p class="tiny" id="roomAvatarLabel">ELIGE TU AVATAR</p><div class="avatar-picker" id="avatarPicker"></div><button type="button" id="roomProfileContinue" class="room-continue">CONTINUAR →</button></div>
-  <div id="roomStageActions" hidden><div class="room-stage-label">02 / TU SALA</div><div class="room-fields"><label>Modo de la nueva sala<select id="roomMode"><option value="quick">Rápido</option><option value="tactical">Estándar</option><option value="advanced">Emblema</option></select></label></div>
+  <div id="roomStageActions"><div class="room-stage-label">02 / TU SALA</div><p id="roomEntryAlert" class="room-entry-alert" role="alert" aria-live="polite" hidden></p><div class="room-fields"><label>Nombre de la sala<input id="roomName" maxlength="40" placeholder="Scrim" required></label><label>Modo de la nueva sala<select id="roomMode"><option value="quick">Rápido</option><option value="tactical">Estándar</option></select></label></div>
   <div class="room-actions"><button id="createRoom" type="button">+ CREAR SALA</button></div>
   <hr style="border:0;border-top:1px solid #40313b;margin:22px 0"><h2>ENTRAR CON CÓDIGO</h2><div class="inputrow"><input id="roomInvite" placeholder="Pega el código de invitación" maxlength="36" spellcheck="false"><button id="joinRoom" type="button">UNIRME</button></div>
   <p class="room-note">La invitación es privada: compártela solamente con las personas que quieras en tu sala.</p>
-  <div class="room-phase-note"><strong>Próximamente:</strong> cuentas permanentes, nombre personalizado de sala y moderación del anfitrión. Estas opciones requieren la fase de Firebase.</div>
-  <button type="button" id="roomEditProfile" class="secondary small-btn">← Editar perfil</button></div>
+  
+  <p class="room-note">El apodo y avatar se toman de tu cuenta Wynee. Puedes cambiarlos desde el botón de tu cuenta en la barra superior.</p></div>
  </section>
+ <section id="roomFarewell" class="panel" hidden style="max-width:680px;margin:24px auto;text-align:center;padding:32px 22px" aria-live="polite"><span class="experience-eyebrow">WYNEE ROOMS</span><h2 style="margin-top:14px">Sala eliminada correctamente</h2><p class="room-note" style="margin:12px 0 24px">La partida terminó y la sala se eliminó. ¡Gracias por jugar en Wynee!</p><button type="button" id="roomFarewellBack">← Volver al inicio</button></section>
  <section id="roomWorkspace" hidden>
-  <section class="panel"><div class="row"><h2 id="roomTitle">SALA</h2><button id="roomLeave" class="secondary small-btn" type="button">Salir</button></div><p class="tiny">CÓDIGO PARA INVITAR</p><div class="room-code-row"><input readonly id="roomCode"><button id="copyRoomCode" type="button" class="secondary small-btn">Copiar código</button></div><h3>Jugadores</h3><div class="room-members" id="roomMembers"></div>
-  <details><summary>✎ Cambiar mi apodo o avatar</summary><p class="tiny">Tu cambio aparecerá en todos los registros, sin borrarlos.</p><label for="roomNicknameInRoom">Nuevo apodo</label><input id="roomNicknameInRoom" maxlength="24" minlength="2" placeholder="Ej. iWyne" autocomplete="nickname"><div class="avatar-picker" id="avatarPickerInRoom"></div><button type="button" id="saveRoomProfile">Guardar perfil</button></details></section>
-  <section class="panel"><h2>REGISTRAR HECHIZO</h2><form id="roomForm"><div class="inputrow"><input id="roomCommand" placeholder="Ej. exp f 455" autocomplete="off" required><button type="submit">Calcular y compartir</button></div><div id="roomAdvancedStats" class="room-advanced" hidden><label>Kills<input id="roomKills" type="number" min="0" max="999" value="0"></label><label>Asistencias<input id="roomAssists" type="number" min="0" max="999" value="0"></label><p class="tiny">Reducción 12 % + 1 % por K/A, máximo 20 %.</p></div></form><p class="room-note">En Rápido y Emblema se muestran los últimos 3 registros. En Estándar se muestra el historial compartido. «Reiniciar partida» borra los registros para todos, sin cerrar la sala.</p><div id="roomBoard" class="grid room-board" hidden></div><div class="row" style="margin:14px 0 8px;flex-wrap:wrap"><h3 style="margin:0">Registros compartidos</h3><button id="roomResetMatch" type="button" class="danger small-btn">🗑️ Reiniciar partida</button></div><div id="roomEntries"></div></section>
+  <section class="panel"><div class="row"><h2 id="roomTitle">SALA</h2><button id="roomLeave" class="secondary small-btn" type="button">Salir</button></div><p class="tiny">CÓDIGO PARA INVITAR</p><div class="room-code-row"><input readonly id="roomCode"><button id="copyRoomCode" type="button" class="secondary small-btn">Copiar código</button></div><h3>Jugadores <small id="roomOnlineCount" class="tiny"></small></h3><div class="room-members" id="roomMembers"></div><div id="roomHostControls" hidden style="margin-top:12px"><button id="roomDelete" type="button" class="danger small-btn">🗑️ Eliminar sala para todos</button><p class="tiny">Solo anfitrión · La eliminación no depende del número de jugadores.</p></div>
+  <details hidden><summary>✎ Cambiar mi apodo o avatar</summary><p class="tiny">Tu cambio aparecerá en todos los registros, sin borrarlos.</p><label for="roomNicknameInRoom">Nuevo apodo</label><input id="roomNicknameInRoom" maxlength="24" minlength="2" placeholder="Ej. iWyne" autocomplete="nickname"><div class="avatar-picker" id="avatarPickerInRoom"></div><button type="button" id="saveRoomProfile">Guardar perfil</button></details></section>
+  <details class="wynee-room-tools" id="wyneeRoomTools">
+    <summary>🎵 Sonidos y bromas <span class="wynee-tools-hint">Opcional · abrir panel</span></summary>
+    <div class="wynee-tools-columns" id="wyneeRoomExtras" aria-label="Sonidos y bromas">
+      <section class="wynee-tools-card" aria-label="Soundboard">
+        <h3>🎵 SOUNDBOARD</h3>
+        <p class="room-note">Cuatro sonidos disponibles cuando se agreguen los audios y la sincronización.</p>
+        <div class="wynee-sound-grid"><button type="button" disabled>🔇 Sonido 1</button><button type="button" disabled>🔇 Sonido 2</button><button type="button" disabled>🔇 Sonido 3</button><button type="button" disabled>🔇 Sonido 4</button></div>
+        <p class="tiny">Pendiente: sonidos compartidos, controles de silencio y antispam de 5 segundos.</p>
+      </section>
+      <section class="wynee-tools-card" aria-label="Bromas con voz">
+        <h3>🎙️ WYNEE DI:</h3>
+        <p class="room-note">Escribe solamente lo que quieres que Wynee diga.</p>
+        <div class="wynee-joke-form"><label class="wynee-joke-label" for="wyneeJokeCommand">Wynee di:</label><textarea id="wyneeJokeCommand" maxlength="130" rows="3" placeholder="Rany es bien bot" aria-label="Mensaje que dirá Wynee"></textarea><button id="wyneeJokeSpeak" type="button">🔊 Decir</button></div>
+        <p id="wyneeJokeStatus" class="tiny" role="status" aria-live="polite"></p>
+        <p class="tiny">Por ahora la voz se escucha solo en este dispositivo; compartirla entre jugadores es una función pendiente.</p>
+      </section>
+    </div>
+  </details>
+  <section class="panel"><div id="roomStandardTabs" class="room-tabs" hidden><button id="roomTabRecords" type="button" class="room-tab active">⚔️ Hechizos</button><button id="roomTabEmblem" type="button" class="room-tab">◈ Calculadora de emblemas</button></div><div id="roomRecordsPanel"><h2>REGISTRAR HECHIZO</h2><form id="roomForm"><div class="inputrow"><input id="roomCommand" placeholder="Ej. exp f 455" autocomplete="off" required><button type="submit">Calcular y compartir</button></div><div id="roomAdvancedStats" class="room-advanced" hidden><label>Kills<input id="roomKills" type="number" min="0" max="999" value="0"></label><label>Asistencias<input id="roomAssists" type="number" min="0" max="999" value="0"></label><p class="tiny">Reducción 12 % + 1 % por K/A, máximo 20 %.</p></div></form><p class="room-note">En Rápido se muestran los últimos 3 registros. En Estándar se muestra el historial compartido. «Reiniciar partida» borra los registros para todos, sin cerrar la sala.</p><div id="roomBoard" class="grid room-board" hidden></div><div class="row" style="margin:14px 0 8px;flex-wrap:wrap"><h3 style="margin:0">Registros compartidos</h3><button id="roomResetMatch" type="button" class="danger small-btn">🗑️ Reiniciar partida</button></div><div id="roomEntries"></div></div><div id="roomEmblemPanel" hidden><h2>◈ CALCULADORA DE EMBLEMAS</h2><p class="room-note">Como en Individual: escribe rol, hechizo y tiempo, por ejemplo <code>exp f 455</code>. La reducción comienza en 12 % y aumenta 1 % por kill o asistencia, hasta 20 %. Esta pestaña no cambia el modo de la sala.</p>
+<form id="roomEmblemForm"><div class="inputrow"><input id="roomEmblemCommand" aria-label="Comando de emblemas" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ej. exp f 455" required><button type="submit">Calcular emblema</button></div>
+<div class="stat-grid"><label>Asesinatos (kills)<div class="stepper"><button type="button" data-room-counter="roomEmblemKills" data-step="-1" aria-label="Restar asesinato">−</button><input id="roomEmblemKills" inputmode="numeric" type="number" min="0" max="999" value="0"><button type="button" data-room-counter="roomEmblemKills" data-step="1" aria-label="Sumar asesinato">+</button></div></label><label>Asistencias<div class="stepper"><button type="button" data-room-counter="roomEmblemAssists" data-step="-1" aria-label="Restar asistencia">−</button><input id="roomEmblemAssists" inputmode="numeric" type="number" min="0" max="999" value="0"><button type="button" data-room-counter="roomEmblemAssists" data-step="1" aria-label="Sumar asistencia">+</button></div></label></div>
+<div class="emblem-panel"><div>REDUCCIÓN TOTAL <strong id="roomEmblemPercent">12 %</strong></div><div class="stack-bars" id="roomEmblemBars" aria-hidden="true"></div><p class="tiny" id="roomEmblemStackText">12 % base + 0 % extra (0/8 acumulaciones)</p></div></form>
+<p id="roomEmblemResult" class="room-emblem-result" role="status" aria-live="polite">Escribe un comando para calcular.</p></div></section>
  </section><p id="roomStatus" class="status" aria-live="polite"></p>
 </section>
-<footer id="wyneeGlobalFooter" class="wynee-global-footer"><p><a class="social-link" href="https://ko-fi.com/wyneespelltracker" target="_blank" rel="noopener noreferrer">❤️ Apoya a Wynee ☕</a> <span class="tiny">· Donaciones voluntarias</span></p><p class="tiny">Wynee Spell Tracker · CALCULA JUEGA DOMINA</p></footer> <script type="module" src="./rooms.js"></script>
+<footer id="wyneeGlobalFooter" class="wynee-global-footer"><p><a class="social-link" href="https://ko-fi.com/wyneespelltracker" target="_blank" rel="noopener noreferrer">❤️ Apoya a Wynee ☕</a> <span class="tiny">· Donaciones voluntarias</span></p><p class="tiny">Wynee Spell Tracker · CALCULA JUEGA DOMINA</p></footer> <div id="wyneeAuthModal" class="wynee-auth-overlay" hidden role="dialog" aria-modal="true" aria-label="Cuenta Wynee">
+<div class="wynee-auth-panel"><div class="wynee-auth-top"><h2>CUENTA WYNEE</h2><button id="wyneeAuthClose" type="button" class="secondary small-btn" aria-label="Cerrar">✕</button></div>
+<div id="wyneeAuthLogin"><p>Inicia sesión o crea tu cuenta. Las calculadoras individuales siguen siendo gratuitas y no requieren registro.</p><label>Correo electrónico<input id="wyneeAuthEmail" type="email" autocomplete="email" placeholder="correo@ejemplo.com"></label><label>Contraseña<input id="wyneeAuthPassword" type="password" autocomplete="current-password" placeholder="Mínimo 6 caracteres"></label><div class="wynee-auth-actions"><button id="wyneeAuthSignIn" type="button">Iniciar sesión</button><button id="wyneeAuthRegister" type="button" class="secondary">Crear cuenta</button></div><button id="wyneeAuthReset" type="button" class="secondary small-btn">¿Olvidaste tu contraseña?</button><div class="wynee-auth-divider">O CONTINUAR CON</div><button id="wyneeAuthGoogle" type="button" class="secondary wynee-google-btn">Google</button></div>
+<div id="wyneeAuthProfile" hidden><p>Sesión iniciada: <strong id="wyneeAuthEmailLabel"></strong></p><label>Apodo público<input id="wyneeAuthNick" maxlength="24" minlength="2" autocomplete="nickname" placeholder="Ej. iWyne"></label><p>Elige tu avatar</p><div id="wyneeAuthAvatars" class="wynee-auth-avatars"></div><button id="wyneeAuthSaveProfile" type="button">Guardar perfil</button></div>
+<p id="wyneeAuthStatus" role="status" aria-live="polite"></p><button id="wyneeAuthLogout" type="button" class="secondary small-btn" hidden>Cerrar sesión</button></div></div>
+<!-- Salas temporalmente deshabilitadas: no cargar rooms.js ni rooms-extras.js. -->
+<script type="module" src="./auth.js"></script>
 <script defer src="./voice.js"></script>
 
 <script id="wynee-sticky-controller">
@@ -461,13 +536,15 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 @keyframes wynee-killua-softfloat{from{transform:scale(1.03) translateY(-4px)}to{transform:scale(1.09) translateY(4px)}}
 @media(max-width:680px){.topbar{top:0!important;gap:9px!important;padding:10px!important}.topbar .social-top{width:100%;gap:6px!important}.topbar .wynee-header-actions{width:100%;justify-content:flex-end!important}.wynee-title-panel{min-height:115px;padding:16px 8px}.wynee-title-panel h1{font-size:clamp(23px,6vw,38px)}.wynee-title-panel .sub{letter-spacing:.16em}.wynee-victory-hero{min-height:175px!important;grid-template-columns:1fr 1fr!important}.wynee-victory-art{height:175px!important}.wynee-victory-art img{height:130%!important}}
 @media(prefers-reduced-motion:reduce){.wynee-victory-art img{animation:none!important}}
+
+#roomMembers .room-offline{opacity:.52}#roomMembers .member-chip{display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap}#roomMembers .member-chip button{font-size:11px;padding:5px 7px}
 </style><script id="wynee-phase1-navigation">
 (()=>{'use strict';const el=id=>document.getElementById(id);const gate=el('wyneeExperience'),individual=el('wyneeIndividualHome'),lobby=el('lobbyPage');
 function experience(){gate.hidden=false;individual.hidden=true;lobby.hidden=false;window.scrollTo(0,0)}
 function solo(){gate.hidden=true;individual.hidden=false;lobby.hidden=false;window.scrollTo(0,0)}
 el('wyneeIndividualChoice').addEventListener('click',solo);
 el('wyneeBackExperience').addEventListener('click',experience);
-el('wyneeRoomsChoice').addEventListener('click',()=>{gate.hidden=true;individual.hidden=true;el('openRooms').click()});
+// Salas deshabilitadas durante mantenimiento. No se abre su interfaz.
 el('roomBack').addEventListener('click',experience);
 el('roomLeave').addEventListener('click',experience);
 const stageProfile=el('roomStageProfile'),stageActions=el('roomStageActions');
@@ -475,10 +552,10 @@ function showProfile(){stageProfile.hidden=false;stageActions.hidden=true}
 function showActions(){const nick=el('roomNickname').value.trim();if(nick.length<2||nick.length>24){el('roomNickname').focus();el('roomNickname').setCustomValidity('El apodo debe tener entre 2 y 24 caracteres.');el('roomNickname').reportValidity();return}el('roomNickname').setCustomValidity('');stageProfile.hidden=true;stageActions.hidden=false;window.scrollTo({top:0,behavior:'smooth'})}
 el('roomNickname').addEventListener('input',()=>el('roomNickname').setCustomValidity(''));
 el('roomProfileContinue').addEventListener('click',showActions);
-el('roomEditProfile').addEventListener('click',showProfile);
+// El perfil se edita exclusivamente desde Mi cuenta; no se pide otra vez en salas.
 // En la fase 1 se conserva la autenticación anónima y la estructura de Firestore existentes.
 // Un enlace de invitación abre la pantalla de salas existente sin forzar registro permanente.
-if(new URLSearchParams(location.search).has('sala')){gate.hidden=true;individual.hidden=true}
+// Los enlaces de invitación mantienen el menú de inicio mientras las salas están en mantenimiento.
 })();
 </script><script id="wynee-soft-aurora-native-js">
 /* Canvas 2D, implementacion independiente inspirada en una aurora suave.

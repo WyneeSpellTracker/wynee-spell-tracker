@@ -1,0 +1,12 @@
+WYNEE V1.3 - CORRECCION DEL ENTORNO DE PRUEBAS
+
+Esta versión corrige tests.mjs: los lotes de Firestore ahora usan referencias obtenidas de la misma instancia de base de datos.
+
+1. Extrae el ZIP completo en una sola carpeta.
+2. Abre pruebas-firebase y ejecuta EJECUTAR_PRUEBAS.bat.
+3. Envíame el resultado final de las pruebas.
+
+No publiques firestore.rules todavía. Las reglas incluidas son las mismas que en v1.2, sin validar.
+No se modifica tu Firebase real ni GitHub.
+
+Las pruebas pueden revelar fallos adicionales: la reparación del script no garantiza que todas pasen.

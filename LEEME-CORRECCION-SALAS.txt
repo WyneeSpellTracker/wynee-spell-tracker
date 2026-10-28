@@ -1,0 +1,9 @@
+WYNEE ROOMS V1 - CORRECCION DE NAVEGACION (PRUEBA)
+
+Se corrigio el enlace a la pantalla de salas: faltaba el elemento #openRooms que rooms.js esperaba.
+Se evito la inicializacion duplicada de Firebase en rooms.js, reutilizando la app creada por auth.js.
+Se ajusto el texto de la pantalla de salas y el rotulo de version.
+NO se modificaron firestore.rules, voice.js, calculadoras individuales ni el banner de Killua.
+NO se implementaron aun moderacion, nombres de salas, sincronizacion de comandos TTS o soundboard.
+
+Validacion: sintaxis JS comprobada con node --check. Prueba automatizada visual NO completada porque el navegador de pruebas bloqueo la navegacion local. Probar en entorno web autorizado, no publicar directamente.

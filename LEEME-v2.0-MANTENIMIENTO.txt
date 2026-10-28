@@ -1,0 +1,7 @@
+Wynee v2.0 — Salas compartidas temporalmente deshabilitadas
+
+La experiencia Individual permanece como en v1.9. El botón de Salas compartidas se muestra en mantenimiento y no puede pulsarse. Los scripts rooms.js y rooms-extras.js no se cargan; permanecen dentro del proyecto para futuras versiones. Los enlaces ?sala= ya no abren salas.
+
+Esta publicación solo deshabilita salas en esta versión web. No borra datos existentes ni modifica reglas de Firebase, ni impide que versiones anteriores accedan a Firebase. Para un bloqueo global se necesitan reglas de servidor específicas, que NO se han cambiado.
+
+Subir el contenido de esta carpeta al mismo proyecto Cloudflare para actualizar la web.

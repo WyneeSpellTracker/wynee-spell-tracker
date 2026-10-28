@@ -1,0 +1,11 @@
+WYNEE ROOMS - PRUEBA DE INTEGRACION DE CUENTAS
+
+- Salas reutiliza el apodo y avatar de Mi cuenta (perfil local por UID).
+- No solicita otro apodo ni avatar.
+- Exige sesion permanente (Google o correo); no inicia sesion anonima.
+- Conserva sincronizacion de miembros y cooldowns existente.
+- No se han cambiado las reglas de Firestore: el esquema actual permite miembros autenticados.
+- Los perfiles siguen siendo locales al navegador: la sincronizacion entre dispositivos esta pendiente.
+- El comando divertido y soundboard siguen siendo prototipos locales, no sincronizados.
+- No se ha realizado prueba multijugador con Firebase real.
+- No subir a produccion sin probar crear/unirse desde dos cuentas.

@@ -1,0 +1,10 @@
+WYNEE ROOMS V1 - PROTOTIPO DE COMANDOS Y 4 ESPACIOS DE SONIDOS
+
+Base: Wynee_V1_Cuentas_Globales_PRUEBA.zip.
+Se agregó rooms-extras.js y una sección de comandos divertidos en las salas.
+Comando de prueba: wynee dile a Reus que huele feo
+El texto se pronuncia SOLAMENTE en el navegador local; NO se transmite a otros jugadores.
+Los cuatro botones de soundboard están DESHABILITADOS porque aún no hay audios.
+No se modificaron rooms.js, voice.js, firestore.rules ni auth.js.
+No se implementaron moderación, membresías, chat de voz ni sincronización de mensajes.
+No subir a GitHub Pages antes de probar todas las calculadoras y el login.

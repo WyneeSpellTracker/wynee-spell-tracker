@@ -1,0 +1,11 @@
+WYNEE v1.8 — Eliminación automática y confirmación
+
+1. Página Web: el botón «Eliminar sala» ya solo pide confirmación con Cancelar / Aceptar. No hay que escribir ELIMINAR.
+2. Limpieza automática: se incluyó un servicio de Cloud Functions en limpieza-automatica-firebase/index.js.
+3. CADA MINUTO examina salas, detecta que no haya miembros con presencia de los últimos 90 segundos, marca inicio del vacío y elimina después de 12 minutos si nadie vuelve.
+4. Borra sala, miembros, hechizos, bloqueos y códigos de invitación. Maneja salas antiguas sin miembros activos.
+5. IMPORTANTE: SOLO SUBIR LA CARPETA WEB A CLOUDFLARE NO ACTIVA ESTA FUNCIÓN. La limpieza requiere desplegar Cloud Functions en Firebase y disponer del plan Blaze (facturación habilitada). Es una tarea en el servidor con posibles cargos; no se activó ni se pidió facturación.
+6. NO se modificaron firestore.rules ni el sitio publicado. La función usa Admin SDK, que corre solo en servidor.
+7. Cloud Functions requiere instalar dependencias y desplegar usando firebase deploy --only functions:wyneeLimpiezaSalas desde la carpeta raíz (necesita firebase.json de funciones). No ejecutes deploy sin revisar primero facturación y seguridad.
+8. Limitación: el barrido empieza la cuenta al detectar sala vacía, por lo que la limpieza puede tardar hasta ~13-14 minutos; una pestaña dormida más de 90 s puede marcarse como desconectada.
+9. No se ha probado una ejecución contra Firebase real. Probar primero en emulador / entorno aislado.

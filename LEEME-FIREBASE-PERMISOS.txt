@@ -1,0 +1,22 @@
+WYNEE ROOMS V1 — FIREBASE / PRUEBA
+
+Partimos de Wynee_Rooms_V1_Panel_Compacto_PRUEBA.zip.
+Se conserva el diseño de Individual y el panel compacto de Salas compartidas.
+
+CAMBIOS
+- firestore.rules: se refuerza la validación de creación del primer miembro en un lote atómico y se mantiene el acceso por pertenencia.
+- rooms.js: mensaje de error de permisos más claro.
+
+PASOS PARA PUBLICAR LAS REGLAS (NO SE HAN PUBLICADO AUTOMÁTICAMENTE)
+1. Abre Firebase Console > proyecto wynee-spell-tracker > Firestore Database > Reglas.
+2. Guarda una copia de tus reglas actuales.
+3. Pega el contenido COMPLETO de firestore.rules de este ZIP.
+4. Revisa y pulsa Publicar.
+5. Abre la web en un dominio autorizado, inicia sesión con Google o correo, crea una sala y prueba entrar con otra cuenta.
+
+IMPORTANTE
+- No se han cambiado las reglas activas ni GitHub.
+- El error 'permission-denied' no confirma por sí solo cuál regla falló.
+- No se ha probado una conexión real de dos dispositivos.
+- Estas reglas no incluyen todavía expulsión, bloqueo ni eliminación de salas.
+- La sincronización de audio y soundboard tampoco está implementada.

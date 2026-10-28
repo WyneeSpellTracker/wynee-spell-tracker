@@ -1,0 +1,10 @@
+PRUEBAS DE FIREBASE DE WYNEE (LOCALES)
+
+1. Abre la carpeta pruebas-firebase.
+2. Haz doble clic en EJECUTAR_PRUEBAS.bat.
+3. Puede tardar la primera vez porque descarga dependencias.
+4. Envia captura del resultado final al chat.
+
+NO usa tu proyecto real: el ID demo-wynee-local solo funciona contra el emulador local. NO publiques reglas de Firebase todavía.
+
+Incluye la aplicacion completa en la carpeta principal y conserva su diseño. Esta version es para comprobar las reglas, no una version oficial para publicar.

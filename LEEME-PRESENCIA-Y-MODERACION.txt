@@ -1,0 +1,21 @@
+WYNEE ROOMS V1 · PRESENCIA Y CONTROLES DEL ANFITRIÓN · EXPERIMENTAL
+
+BASE: Wynee_Rooms_V1_Panel_Secundario_Compacto_PRUEBA.zip
+El diseño de Individual y el panel lateral de sonidos y bromas se conservan.
+
+CAMBIOS:
+- Salir elimina el registro propio en rooms/{id}/members/{uid}.
+- Unirse de nuevo con la misma cuenta usa el mismo UID y no duplica el registro.
+- Actividad enviada a Firestore cada 30 s; pasado 90 s sin señales se muestra DESCONECTADO y ya no se cuenta en conectados.
+- El anfitrión (UID dueño de la sala) puede expulsar (el usuario puede volver) y bloquear (no puede volver).
+- El anfitrión puede eliminar sin importar el número de jugadores; la sala se marca eliminada antes de limpiar registros, miembros, bloqueos, invitación y documento principal.
+- No se cambia la versión de producción ni Firebase automáticamente.
+
+IMPORTANTE:
+1) PARA UTILIZAR ESTA VERSIÓN HAY QUE PUBLICAR firestore.rules DESPUÉS DE REVISARLAS. Son una propuesta experimental y modifican la política de permisos.
+2) NO PROBADO con una sesión real de dos usuarios en Firebase ni en navegador. La comprobación de sintaxis no demuestra funcionamiento real.
+3) El sistema de presencia es por heartbeat, NO una detección inmediata fiable de cierres abruptos. Puede tomar más de 90 s.
+4) La limpieza se hace desde el navegador del anfitrión y NO es atómica; si se cierra durante la eliminación, la sala puede quedar marcada como eliminada con documentos por limpiar. Para limpieza fiable de alto volumen se requiere backend/Cloud Function con reintentos.
+5) El owner global de Wynee NO puede borrar salas antiguas creadas por otra UID (incluidas cuentas anónimas) con estas reglas. Se requerirá un backend administrativo con verificación de custom claims y un proceso de migración/limpieza específico.
+6) Mantener una copia de seguridad de las reglas actuales. No publicar esta prueba directamente en GitHub oficial.
+7) No se ha activado soundboard compartido ni TTS multijugador.

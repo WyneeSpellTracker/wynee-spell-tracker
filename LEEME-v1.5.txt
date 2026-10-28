@@ -1,0 +1,7 @@
+Wynee v1.5 — Voz y reconocimiento de salas
+
+Cambios: voz al guardar un hechizo escribiendo en Salas, aunque el micrófono esté apagado; consultas escritas en Salas; alias de reconocimiento para EXP, MID, ROAM, ORO, cooldown y Flameshot.
+
+No se modificaron rooms.js, firestore.rules, auth.js ni index.html.
+Los alias corrigen el texto transcrito cuando coincide; la transcripción nativa del navegador sigue siendo variable.
+Prueba sugerida: sala Estándar exp f 230, consulta cooldown exp; sala Rápido flame 230; micrófono pronunciando variantes listadas.

@@ -1,0 +1,9 @@
+WYNEE ROOMS — NUEVA ETAPA (PRUEBA)
+- Salas: solo Rápido y Estándar.
+- Estándar: pestañas Hechizos y Calculadora de emblemas.
+- Se agrega nombre de sala sincronizado en documento Firestore.
+- Se actualizan reglas Firestore para nombre y dos modos; NO están publicadas.
+- La calculadora de emblemas es local, no crea registros compartidos.
+- La sincronización real de sonido y TTS, controles de anfitrión y seguridad anti-spam siguen pendientes.
+- Para crear salas con nombre es necesario publicar las reglas adjuntas tras revisión; la copia por sí sola no cambia Firebase.
+- No publicar en GitHub hasta comprobar funcionamiento.

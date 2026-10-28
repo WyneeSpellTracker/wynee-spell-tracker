@@ -1,0 +1,12 @@
+WYNEE v1.9 — CADUCIDAD GRATUITA DE SALAS (SPARK)
+
+1. Actualiza la web subiendo esta carpeta a tu sitio de pruebas Cloudflare.
+2. Antes de usar la función nueva, respalda tus reglas y publica el firestore.rules de esta versión en Firebase Firestore > Reglas.
+3. Las salas NUEVAS tienen expiresAt; una sala se caduca 12 minutos después del último heartbeat (cada 30 s).
+4. Los nuevos ingresos a una sala vencida son rechazados en el cliente Y por reglas Firestore.
+5. Limpieza física diferida: solo el anfitrión puede borrar sus salas caducadas; la web recuerda salas creadas EN ESE NAVEGADOR y las limpia al volver a iniciar sesión. Si jamás vuelve, los documentos seguirán almacenados.
+6. NO hay cron ni Cloud Functions; esto funciona en plan Spark.
+7. Las salas anteriores, sin expiresAt, conservan su comportamiento; no se eliminan automáticamente.
+8. La caducidad se basa en última actualización de presencia, no en hechizos escritos.
+9. No hay cambios al diseño o calculadoras.
+10. IMPORTANTE: El emulador de reglas prueba permisos, pero la ejecución multijugador en dos dispositivos debe verificarse manualmente.

@@ -2,23 +2,42 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
+    function owner(roomId) {
+      return signedIn() && exists(/databases/$(database)/documents/rooms/$(roomId))
+        && get(/databases/$(database)/documents/rooms/$(roomId)).data.owner == request.auth.uid;
+    }
+    function activeRoom(roomId) {
+      return existsAfter(/databases/$(database)/documents/rooms/$(roomId))
+        && getAfter(/databases/$(database)/documents/rooms/$(roomId)).data.get('status','active') == 'active'
+        && getAfter(/databases/$(database)/documents/rooms/$(roomId)).data.get('expiresAt', request.time + duration.value(1,'d')) > request.time;
+    }
+    function roomIsCurrent(roomId) {
+      return exists(/databases/$(database)/documents/rooms/$(roomId))
+        && get(/databases/$(database)/documents/rooms/$(roomId)).data.get('status','active') == 'active'
+        && get(/databases/$(database)/documents/rooms/$(roomId)).data.get('expiresAt', request.time + duration.value(1,'d')) > request.time;
+    }
+    function validExpiry(t) {
+      return t is timestamp && t > request.time + duration.value(11,'m')
+        && t < request.time + duration.value(13,'m');
+    }
     function member(roomId) {
       return signedIn() && exists(/databases/$(database)/documents/rooms/$(roomId)/members/$(request.auth.uid));
     }
     function validProfile(d) {
-      return d.keys().hasOnly(['uid','nick','avatar','inviteId','joinedAt'])
+      return d.keys().hasOnly(['uid','nick','avatar','inviteId','joinedAt','lastSeenAt'])
         && d.keys().hasAll(['uid','nick','avatar','inviteId','joinedAt'])
         && d.uid == request.auth.uid && d.nick is string
         && d.nick.size() >= 2 && d.nick.size() <= 24
         && d.avatar is int && d.avatar >= 1 && d.avatar <= 6
         && d.inviteId is string && d.inviteId.size() == 36
-        && d.joinedAt == request.time;
+        && d.joinedAt == request.time
+        && (!('lastSeenAt' in d) || d.lastSeenAt == request.time);
     }
     function validRecord(d) {
       return d.keys().hasOnly(['role','spell','cd','used','ready','reduction','kills','assists','author','createdAt','editedAt'])
         && d.keys().hasAll(['role','spell','cd','used','ready','reduction','kills','assists','author','createdAt'])
         && d.role in ['','EXP','MID','JUNGLA','ROAM','ORO']
-        && d.spell in ['Parpadeo','Retribución','Aegis','Inspirar','Venganza','Petrificar','Revitalizar','Purificar','Sprint']
+        && d.spell in ['Parpadeo','Retribución','Aegis','Inspirar','Venganza','Petrificar','Revitalizar','Purificar','Sprint','Flameshot']
         && d.cd is int && d.cd >= 30 && d.cd <= 120
         && d.used is int && d.used >= 0 && d.used <= 59999
         && d.ready is int && d.ready >= d.used && d.ready <= 60119
@@ -40,41 +59,72 @@ service cloud.firestore {
         && request.resource.data.createdAt == request.time
         && existsAfter(/databases/$(database)/documents/rooms/$(request.resource.data.roomId))
         && getAfter(/databases/$(database)/documents/rooms/$(request.resource.data.roomId)).data.owner == request.auth.uid;
-      allow update, delete: if false;
+      allow update: if false;
+      allow delete: if owner(resource.data.roomId) && resource.data.owner == request.auth.uid
+        && get(/databases/$(database)/documents/rooms/$(resource.data.roomId)).data.get('status','active') == 'deleted';
     }
     match /rooms/{roomId} {
       allow create: if signedIn() && roomId.size() == 40
-        && request.resource.data.keys().hasOnly(['owner','mode','createdAt'])
+        && request.resource.data.keys().hasOnly(['owner','mode','name','status','createdAt','expiresAt'])
         && request.resource.data.owner == request.auth.uid
-        && request.resource.data.mode in ['quick','tactical','advanced']
-        && request.resource.data.createdAt == request.time;
+        && request.resource.data.status == 'active'
+        && request.resource.data.mode in ['quick','tactical']
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2 && request.resource.data.name.size() <= 40
+        && request.resource.data.createdAt == request.time
+        && (!('expiresAt' in request.resource.data) || validExpiry(request.resource.data.expiresAt));
       allow get: if signedIn() && exists(/databases/$(database)/documents/rooms/$(roomId))
         && (resource.data.owner == request.auth.uid || member(roomId));
-      allow list, update, delete: if false;
+      allow list: if false;
+      allow update: if (
+        (owner(roomId) && resource.data.get('status','active') == 'active'
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])
+          && request.resource.data.status == 'deleted')
+        || (member(roomId) && roomIsCurrent(roomId)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['expiresAt'])
+          && validExpiry(request.resource.data.expiresAt))
+        );
+      allow delete: if owner(roomId) && resource.data.get('status','active') == 'deleted';
       match /members/{uid} {
-        allow get: if (signedIn() && uid == request.auth.uid) || member(roomId);
-        allow list: if member(roomId);
+        allow get: if (signedIn() && uid == request.auth.uid) || member(roomId) || owner(roomId);
+        allow list: if member(roomId) || owner(roomId);
         allow create: if signedIn() && uid == request.auth.uid
+          && activeRoom(roomId)
+          && !exists(/databases/$(database)/documents/rooms/$(roomId)/bans/$(uid))
           && validProfile(request.resource.data)
           && existsAfter(/databases/$(database)/documents/invites/$(request.resource.data.inviteId))
           && getAfter(/databases/$(database)/documents/invites/$(request.resource.data.inviteId)).data.roomId == roomId
-          && existsAfter(/databases/$(database)/documents/rooms/$(roomId));
+          && existsAfter(/databases/$(database)/documents/rooms/$(roomId))
+          && (getAfter(/databases/$(database)/documents/rooms/$(roomId)).data.owner == request.auth.uid
+              || exists(/databases/$(database)/documents/rooms/$(roomId)));
         allow update: if signedIn() && uid == request.auth.uid
-          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nick','avatar'])
+          && activeRoom(roomId)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nick','avatar','lastSeenAt'])
+          && (!('lastSeenAt' in request.resource.data) || request.resource.data.lastSeenAt is timestamp)
           && request.resource.data.nick is string
           && request.resource.data.nick.size() >= 2 && request.resource.data.nick.size() <= 24
           && request.resource.data.avatar is int && request.resource.data.avatar >= 1 && request.resource.data.avatar <= 6;
-        allow delete: if false;
+        allow delete: if signedIn() && (uid == request.auth.uid || owner(roomId));
+      }
+      match /bans/{uid} {
+        allow get: if owner(roomId) || (signedIn() && uid == request.auth.uid);
+        allow list: if owner(roomId);
+        allow create: if owner(roomId) && activeRoom(roomId) && uid != request.auth.uid
+          && request.resource.data.keys().hasOnly(['uid','by','createdAt'])
+          && request.resource.data.uid == uid && request.resource.data.by == request.auth.uid
+          && request.resource.data.createdAt == request.time;
+        allow update: if false;
+        allow delete: if owner(roomId);
       }
       match /records/{recordId} {
-        allow get, list: if member(roomId);
-        allow create: if member(roomId) && validRecord(request.resource.data)
+        allow get, list: if (member(roomId) || owner(roomId)) && roomIsCurrent(roomId);
+        allow create: if member(roomId) && activeRoom(roomId) && validRecord(request.resource.data)
           && request.resource.data.author == request.auth.uid
           && request.resource.data.createdAt == request.time;
-        allow update: if member(roomId) && validRecord(request.resource.data)
+        allow update: if member(roomId) && activeRoom(roomId) && validRecord(request.resource.data)
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['role','spell','cd','used','ready','reduction','kills','assists','editedAt'])
           && request.resource.data.editedAt == request.time;
-        allow delete: if member(roomId);
+        allow delete: if (member(roomId) && roomIsCurrent(roomId)) || owner(roomId);
       }
     }
   }

@@ -1,0 +1,5 @@
+Wynee v1.6 - Recordatorios por escrito
+
+Escribe "activar recordatorios" o "desactivar recordatorios" en el campo de comandos y presiona Calcular/Enviar. Compatible con Individual (Rapido, Estandar, Emblema) y Salas (Rapido, Estandar, pestana Emblemas). Confirma con voz sin encender el microfono. Los formularios ordinarios conservan su comportamiento.
+
+No se modificaron Firebase, los archivos rooms.js, auth.js, rooms-extras.js ni el aspecto de index.html.
